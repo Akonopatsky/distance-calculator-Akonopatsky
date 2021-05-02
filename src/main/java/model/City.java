@@ -1,8 +1,30 @@
 package model;
 
 public class City {
-    long id;
-    String Name;
-    double latitude;
-    double longitude;
+    private long id;
+    private String name;
+    private double latitude;
+    private double longitude;
+
+    public City(String name, double latitude, double longitude) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 }
