@@ -1,4 +1,4 @@
-package dto;
+package distancecalculator.dto;
 
 public enum CalculationType {
 }

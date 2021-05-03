@@ -1,4 +1,4 @@
-package distance_calculator;
+package distancecalculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

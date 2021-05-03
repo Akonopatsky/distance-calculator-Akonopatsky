@@ -1,6 +1,6 @@
-package dto;
+package distancecalculator.dto;
 
-import model.City;
+import distancecalculator.model.City;
 
 public class CityIdName {
     private final long id;

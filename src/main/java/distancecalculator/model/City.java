@@ -1,4 +1,4 @@
-package model;
+package distancecalculator.model;
 
 public class City {
     private long id;
