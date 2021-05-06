@@ -1,10 +1,20 @@
 package distancecalculator.model;
 
+import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "city")
+@XmlType(propOrder = {"id", "fromCity", "toCity", "distance"})
 public class Distance {
     private long id;
     private City fromCity;
     private City toCity;
     private double distance;
+
+    public Distance() {
+    }
 
     public Distance(City fromCity, City toCity, double distance) {
         this.fromCity = fromCity;
@@ -26,5 +36,25 @@ public class Distance {
 
     public double getDistance() {
         return distance;
+    }
+
+    @XmlAnyAttribute
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @XmlElement(name = "fromCity")
+    public void setFromCity(City fromCity) {
+        this.fromCity = fromCity;
+    }
+
+    @XmlElement(name = "toCity")
+    public void setToCity(City toCity) {
+        this.toCity = toCity;
+    }
+
+    @XmlElement(name = "distance")
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

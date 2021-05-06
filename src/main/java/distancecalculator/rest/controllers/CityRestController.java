@@ -32,7 +32,7 @@ public class CityRestController {
             @RequestParam(name = "fromCities") List<String> fromCities,
             @RequestParam(name = "toCities") List<String> toCities
     ) {
-        logger.info("get distances type {} from cities {} to cities {} ", calculationType, fromCities, toCities);
+        logger.info("get distances: type {} from cities {} to cities {} ", calculationType, fromCities, toCities);
         return distanceCalculateService.calculateDistance(calculationType, fromCities, toCities);
     }
 

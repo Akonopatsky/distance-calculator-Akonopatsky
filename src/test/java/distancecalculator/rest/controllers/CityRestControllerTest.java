@@ -40,11 +40,13 @@ class CityRestControllerTest {
     @Test
     void getAllCities() throws Exception {
         given(distanceCalculateService.getAllCities()).willReturn(
-                Arrays.asList(new CityDto(1, "London"))
+                Arrays.asList(
+                        new CityDto(1, "London"),
+                        new CityDto(2, "Samara"))
         );
-        mvc.perform(get("/api/cities", 1L))
+        mvc.perform(get("/api/cities"))
                 .andExpect(status().isOk());
-        mvc.perform(get("/api/city/list", 1L))
+        mvc.perform(get("/api/city/list"))
                 .andExpect(status().isOk());
     }
 
@@ -52,17 +54,20 @@ class CityRestControllerTest {
     void calculateDistances() throws Exception {
         given(distanceCalculateService.calculateDistance(
                 "all",
-                Arrays.asList("from"),
-                Arrays.asList("to")
-        )).willReturn(Arrays.asList(new DistanceDto("from", "to", 150))
+                Arrays.asList("London"),
+                Arrays.asList("Samara")
+        )).willReturn(Arrays.asList(new DistanceDto("London", "Samara", 3300))
         );
-        mvc.perform(get("/api/distances", "all","from", "to"))
-                .andExpect(status().isOk());
+        mvc.perform(get("/api/distances")
+                .param("calculationType", "all")
+                .param("fromCities", "London")
+                .param("toCities", "Samara")
+        ).andExpect(status().isOk());
     }
 
     @Test
     void uploadXmlFile() throws Exception {
-        mvc.perform(get("/api/upload", 1L))
+        mvc.perform(get("/api/upload"))
                 .andExpect(status().isOk());
     }
 }
