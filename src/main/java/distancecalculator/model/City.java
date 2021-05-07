@@ -1,12 +1,10 @@
 package distancecalculator.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "city")
 @XmlType(propOrder = {"id", "name", "latitude", "longitude"})
+/*@XmlAccessorType(XmlAccessType.FIELD)*/
 public class City {
     private long id;
     private String name;
@@ -44,6 +42,7 @@ public class City {
         this.id = id;
     }
 
+    @XmlElement(name = "name")
     public void setName(String name) {
         this.name = name;
     }

@@ -34,7 +34,7 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     @Override
     public void upload(MultipartFile multipartFile) {
         logger.info("try to parse file : {}", multipartFile.getName());
-        List<Distance> distanceList =
+
 
     }
 }
