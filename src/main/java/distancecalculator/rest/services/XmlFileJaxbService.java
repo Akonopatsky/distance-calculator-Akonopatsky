@@ -3,6 +3,8 @@ package distancecalculator.rest.services;
 
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
+import distancecalculator.rest.dto.CityDistanceListXml;
+import distancecalculator.rest.dto.DistanceXml;
 import org.springframework.jdbc.support.xml.XmlBinaryStreamProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,24 +35,27 @@ public class XmlFileJaxbService {
     }
 
     public static void main(String[] args) throws JAXBException {
-        City city1 = new City("City1", 111.11, 119.119);
-        City city2 = new City("City3", 222.22, 229.229);
-        City city3 = new City("City3", 333.33, 339.339);
-        City city4 = new City("City4", 444.44, 449.449);
-        city1.setId(1L);
-        city2.setId(2L);
-        city3.setId(3L);
-        city4.setId(4L);
+        City city1 = new City(1L,"City1", 111.11, 119.119);
+        City city2 = new City(2L,"City3", 222.22, 229.229);
+        City city3 = new City(3L,"City3", 333.33, 339.339);
+        City city4 = new City(4L,"City4", 444.44, 449.449);
 
+        Distance distance1 = new Distance(1L, city1, city2, 1188);
+        Distance distance2 = new Distance(2L, city3, city4, 2288);
 
-        Distance distance1 = new Distance(city1, city2, 1188);
-        Distance distance2 = new Distance(city3, city4, 2288);
-        distance1.setId(1L);
-        distance1.setId(2L);
-        JAXBContext jaxbContext = JAXBContext.newInstance(City.class);
+        CityDistanceListXml cityDistanceListXml = new CityDistanceListXml();
+        cityDistanceListXml.addCity(city1);
+        cityDistanceListXml.addCity(city2);
+        cityDistanceListXml.addCity(city3);
+        cityDistanceListXml.addCity(city4);
+        cityDistanceListXml.addDistance(distance1);
+        cityDistanceListXml.addDistance(distance2);
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(CityDistanceListXml.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.marshal(city1, new File("./test.xml"));
-        marshaller.marshal(city2, new File("./test.xml"));
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(cityDistanceListXml, new File("./test.xml"));
+
 
     }
 }
