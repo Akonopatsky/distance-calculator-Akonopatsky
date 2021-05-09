@@ -1,10 +1,8 @@
 package distancecalculator.rest.services;
 
 import distancecalculator.Dao.CityDistanceDao;
-import distancecalculator.model.Distance;
-import distancecalculator.rest.controllers.CityRestController;
-import distancecalculator.rest.dto.CityDto;
-import distancecalculator.rest.dto.DistanceDto;
+import distancecalculator.rest.dto.CityDtoRest;
+import distancecalculator.rest.dto.DistanceDtoRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,12 +20,12 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     }
 
     @Override
-    public List<CityDto> getAllCities() {
+    public List<CityDtoRest> getAllCities() {
         return null;
     }
 
     @Override
-    public List<DistanceDto> calculateDistance(String calculationType, List<String> fromCities, List<String> toCities) {
+    public List<DistanceDtoRest> calculateDistance(String calculationType, List<String> fromCities, List<String> toCities) {
         return null;
     }
 
