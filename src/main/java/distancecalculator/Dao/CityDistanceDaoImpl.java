@@ -1,9 +1,8 @@
 package distancecalculator.Dao;
 
-import distancecalculator.model.City;
-import distancecalculator.model.Distance;
+import distancecalculator.calculator.model.City;
+import distancecalculator.calculator.model.Distance;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

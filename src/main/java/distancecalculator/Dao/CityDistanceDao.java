@@ -1,7 +1,7 @@
 package distancecalculator.Dao;
 
-import distancecalculator.model.City;
-import distancecalculator.model.Distance;
+import distancecalculator.calculator.model.City;
+import distancecalculator.calculator.model.Distance;
 
 import java.util.List;
 

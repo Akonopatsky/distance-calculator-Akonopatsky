@@ -1,6 +1,6 @@
 package distancecalculator.rest.dto;
 
-import distancecalculator.model.Distance;
+import distancecalculator.calculator.model.Distance;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
