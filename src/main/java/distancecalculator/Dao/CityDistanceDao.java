@@ -8,7 +8,7 @@ import java.util.List;
 public interface CityDistanceDao {
     List<City> getAllCities();
 
-    List<Distance> getDistances(List<City> cityList);
+    Distance getDistance(City fromCity, City toCity);
 
     long saveDistanceList(List<Distance> distanceList);
 

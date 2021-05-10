@@ -1,6 +1,7 @@
 package distancecalculator.rest.services;
 
 import distancecalculator.Dao.CityDistanceDao;
+import distancecalculator.converters.XmlFileJaxbService;
 import distancecalculator.rest.dto.CitiesAndDistancesXML;
 import distancecalculator.rest.dto.CityDtoRest;
 import distancecalculator.rest.dto.DistanceDtoRest;

@@ -14,7 +14,7 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     }
 
     @Override
-    public List<Distance> getDistances(List<City> cityList) {
+    public Distance getDistance(City fromCity, City toCity) {
         return null;
     }
 

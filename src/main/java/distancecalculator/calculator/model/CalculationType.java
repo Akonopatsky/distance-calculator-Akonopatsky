@@ -1,8 +1,8 @@
 package distancecalculator.calculator.model;
 
 public enum CalculationType {
-    CROWFLIGHT("Crowflight"),
-    DISTANCE_MATRIX("DistanceMatrix"),
+    CROW_FLIGHT("CROWFLIGHT"),
+    DISTANCE_MATRIX("DISTANCEMATRIX"),
     ALL("All");
 
     private final String name;
