@@ -1,4 +1,4 @@
-package distancecalculator.rest.dto;
+package distancecalculator.dto;
 
 public class DistanceDtoRest {
 

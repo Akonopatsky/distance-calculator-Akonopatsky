@@ -1,11 +1,10 @@
-package distancecalculator.Dao.Services;
+package distancecalculator.converters;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import distancecalculator.rest.dto.CityDto;
-import distancecalculator.rest.dto.DistanceDto;
+import distancecalculator.model.City;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +19,8 @@ import java.util.List;
 
 public class CsvFileLoader {
     private static final Logger logger = LoggerFactory.getLogger(CsvFileLoader.class);
-    public static List<CityDto> readFromCSV(String fileName, char CsvSeparator) {
+
+    public static List<City> readFromCSV(String fileName, char CsvSeparator) {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(
@@ -38,20 +38,19 @@ public class CsvFileLoader {
         CSVReader csvReader = new CSVReaderBuilder(reader)
                 .withCSVParser(parser)
                 .build();
-        List<CityDto> distanceList = new ArrayList<>();
+        List<City> cityList = new ArrayList<>();
         for (String[] nextLine : csvReader) {
             try {
-                CityDto city = new CityDto(
+                City city = new City(
                         nextLine[0],
                         Double.parseDouble(nextLine[1]),
                         Double.parseDouble(nextLine[2])
                 );
-                distanceList.add(city);
+                cityList.add(city);
             } catch (NumberFormatException e) {
                 logger.error(nextLine[0].toString());
             }
         }
-        return distanceList;
-
+        return cityList;
     }
 }

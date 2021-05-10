@@ -1,7 +1,7 @@
 package distancecalculator.rest.controllers;
 
-import distancecalculator.rest.dto.CityDtoRest;
-import distancecalculator.rest.dto.DistanceDtoRest;
+import distancecalculator.dto.CityDtoRest;
+import distancecalculator.dto.DistanceDtoRest;
 import distancecalculator.rest.services.DistanceCalculateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package distancecalculator.rest.controllers;
 
-import distancecalculator.rest.dto.CityDtoRest;
-import distancecalculator.rest.dto.DistanceDtoRest;
+import distancecalculator.dto.CityDtoRest;
+import distancecalculator.dto.DistanceDtoRest;
 import distancecalculator.rest.services.DistanceCalculateService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

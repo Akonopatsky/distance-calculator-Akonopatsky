@@ -1,7 +1,7 @@
-package distancecalculator.calculator.Utils;
+package distancecalculator.utils;
 
-import distancecalculator.calculator.model.City;
-import distancecalculator.calculator.model.Distance;
+import distancecalculator.model.City;
+import distancecalculator.model.Distance;
 
 public class CalculateServiceImpl {
     public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;

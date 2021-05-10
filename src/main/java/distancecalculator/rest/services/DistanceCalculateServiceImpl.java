@@ -1,10 +1,10 @@
 package distancecalculator.rest.services;
 
-import distancecalculator.Dao.CityDistanceDao;
-import distancecalculator.converters.XmlFileJaxbService;
-import distancecalculator.rest.dto.CitiesAndDistancesXML;
-import distancecalculator.rest.dto.CityDtoRest;
-import distancecalculator.rest.dto.DistanceDtoRest;
+import distancecalculator.dao.CityDistanceDao;
+import distancecalculator.converters.XmlService;
+import distancecalculator.dto.CitiesAndDistancesXML;
+import distancecalculator.dto.CityDtoRest;
+import distancecalculator.dto.DistanceDtoRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
             InputStream inputStream = multipartFile.getInputStream();
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
-            CitiesAndDistancesXML citiesAndDistancesXML = XmlFileJaxbService.unMarshalFile(inputStream);
+            CitiesAndDistancesXML citiesAndDistancesXML = XmlService.unMarshalFile(inputStream);
 
 
         } catch (IOException e) {

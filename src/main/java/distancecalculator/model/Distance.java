@@ -1,4 +1,4 @@
-package distancecalculator.calculator.model;
+package distancecalculator.model;
 
 public class Distance {
     private long id;

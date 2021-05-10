@@ -1,4 +1,4 @@
-package distancecalculator.calculator.model;
+package distancecalculator.dto;
 
 public enum CalculationType {
     CROW_FLIGHT("CROWFLIGHT"),
