@@ -19,5 +19,4 @@ public class CalculateServiceImpl {
         Distance result = new Distance(fromCity, toCity, distance);
         return result;
     }
-
 }
