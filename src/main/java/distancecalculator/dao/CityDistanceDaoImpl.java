@@ -8,6 +8,8 @@ import java.util.List;
 
 @Component
 public class CityDistanceDaoImpl implements CityDistanceDao {
+    private CityRepository cityRepository;
+
     @Override
     public List<City> getAllCities() {
         return null;
@@ -26,5 +28,10 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     @Override
     public long saveCityList(List<City> cityList) {
         return 0;
+    }
+
+    @Override
+    public City saveCity(City city) {
+        return cityRepository.save(city);
     }
 }
