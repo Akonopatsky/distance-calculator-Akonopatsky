@@ -2,12 +2,14 @@ package distancecalculator.rest.services;
 
 import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.converters.XmlService;
+import distancecalculator.dao.CityRepository;
 import distancecalculator.dto.CitiesAndDistancesXML;
 import distancecalculator.dto.CityDtoRest;
 import distancecalculator.dto.DistanceDtoRest;
 import distancecalculator.model.City;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +21,9 @@ import java.util.List;
 @Service
 public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     private static final Logger logger = LoggerFactory.getLogger(DistanceCalculateServiceImpl.class);
-    private final CityDistanceDao dao;
+    private CityDistanceDao dao;
+    @Autowired
+    private CityRepository cityRepository;
 
     public DistanceCalculateServiceImpl(CityDistanceDao dao) {
         this.dao = dao;
@@ -45,6 +49,8 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
                 city.getName(),
                 city.getLatitude(),
                 city.getLongitude());
+        List<City> cities = (List<City>) cityRepository.findAll();
+        cities.forEach(c -> System.out.println(c));
         return null;
     }
 
