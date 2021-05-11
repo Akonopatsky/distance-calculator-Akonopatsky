@@ -1,10 +1,13 @@
 package distancecalculator.rest.controllers;
 
+import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.dto.CityDtoRest;
 import distancecalculator.dto.DistanceDtoRest;
+import distancecalculator.model.City;
 import distancecalculator.rest.services.DistanceCalculateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +18,8 @@ import java.util.List;
 public class CityRestController {
     private static final Logger logger = LoggerFactory.getLogger(CityRestController.class);
     private final DistanceCalculateService distanceCalculateService;
+    @Autowired
+    private CityDistanceDao cityDistanceDao;
 
     public CityRestController(DistanceCalculateService distanceCalculateService) {
         this.distanceCalculateService = distanceCalculateService;
@@ -37,7 +42,7 @@ public class CityRestController {
     }
 
     @PutMapping("/api/upload")
-    public  ResponseEntity uploadXmlFile(
+    public ResponseEntity uploadXmlFile(
             @RequestParam(name = "file") MultipartFile file
     ) {
         logger.info("post request /upload ");

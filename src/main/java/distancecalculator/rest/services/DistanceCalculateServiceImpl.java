@@ -44,11 +44,14 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
                 returnCity.getName(),
                 returnCity.getLatitude(),
                 returnCity.getLongitude());
+        System.out.println(returnCity==city);
         logger.info("id {} name {} longitude {} latitude {}",
                 city.getId(),
                 city.getName(),
                 city.getLatitude(),
                 city.getLongitude());
+        City city2 = new City(city.getId(), "NeyYork", 12.25, 32.244);
+        dao.saveCity(city2);
         List<City> cities = (List<City>) cityRepository.findAll();
         cities.forEach(c -> System.out.println(c));
         return null;
@@ -61,7 +64,7 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     }
 
     @Override
-    public void upload(MultipartFile multipartFile)  {
+    public void upload(MultipartFile multipartFile) {
         logger.info("try to parse file : {}", multipartFile.getName());
         try {
             InputStream inputStream = multipartFile.getInputStream();
