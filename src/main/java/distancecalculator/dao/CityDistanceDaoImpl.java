@@ -2,12 +2,15 @@ package distancecalculator.dao;
 
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
+@Repository
 public class CityDistanceDaoImpl implements CityDistanceDao {
+    @Autowired
     private CityRepository cityRepository;
 
     @Override

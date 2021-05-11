@@ -5,6 +5,7 @@ import distancecalculator.converters.XmlService;
 import distancecalculator.dto.CitiesAndDistancesXML;
 import distancecalculator.dto.CityDtoRest;
 import distancecalculator.dto.DistanceDtoRest;
+import distancecalculator.model.City;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,30 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
 
     @Override
     public List<CityDtoRest> getAllCities() {
+
+        City city = new City("London", 12.25, 32.244);
+        logger.info("id {} name {} longitude {} latitude {}",
+                city.getId(),
+                city.getName(),
+                city.getLatitude(),
+                city.getLongitude());
+        City returnCity = dao.saveCity(city);
+        logger.info("id {} name {} longitude {} latitude {}",
+                returnCity.getId(),
+                returnCity.getName(),
+                returnCity.getLatitude(),
+                returnCity.getLongitude());
+        logger.info("id {} name {} longitude {} latitude {}",
+                city.getId(),
+                city.getName(),
+                city.getLatitude(),
+                city.getLongitude());
         return null;
     }
 
     @Override
     public List<DistanceDtoRest> calculateDistance(String calculationType, List<String> fromCities, List<String> toCities) {
+
         return null;
     }
 
@@ -49,7 +69,5 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-
-
     }
 }

@@ -1,12 +1,15 @@
 package distancecalculator.dao;
 
+import distancecalculator.DistanceCalculator;
 import distancecalculator.model.City;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(
+        classes = DistanceCalculator.class
+)
 class CityDistanceDaoImplTest {
     private static final Logger logger = LoggerFactory.getLogger(CityDistanceDaoImplTest.class);
 private CityDistanceDao cityDistanceDao;

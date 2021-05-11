@@ -13,13 +13,6 @@ public class DistanceCalculator {
 private static CityDistanceDao cityDistanceDao;
 	public static void main(String[] args) {
 		SpringApplication.run(DistanceCalculator.class, args);
-		City city = new City("London", 12.25, 32.244);
-		City returnCity = cityDistanceDao.saveCity(city);
-		logger.info("id {} name {} longitude {} latitude {}",
-				returnCity.getId(),
-				returnCity.getName(),
-				returnCity.getLatitude(),
-				returnCity.getLongitude());
 	}
 
 }
