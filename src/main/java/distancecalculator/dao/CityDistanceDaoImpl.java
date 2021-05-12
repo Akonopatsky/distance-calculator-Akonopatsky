@@ -3,7 +3,6 @@ package distancecalculator.dao;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 public class CityDistanceDaoImpl implements CityDistanceDao {
     @Autowired
     private CityRepository cityRepository;
+    @Autowired DistanceRepository distanceRepository;
 
     @Override
     public List<City> getAllCities() {
@@ -36,5 +36,10 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     @Override
     public City saveCity(City city) {
         return cityRepository.save(city);
+    }
+
+    @Override
+    public Distance saveDistance(Distance distance) {
+        return distanceRepository.save(distance);
     }
 }

@@ -3,10 +3,12 @@ package distancecalculator.rest.services;
 import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.converters.XmlService;
 import distancecalculator.dao.CityRepository;
+import distancecalculator.dao.DistanceRepository;
 import distancecalculator.dto.CitiesAndDistancesXML;
 import distancecalculator.dto.CityDtoRest;
 import distancecalculator.dto.DistanceDtoRest;
 import distancecalculator.model.City;
+import distancecalculator.model.Distance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     private CityDistanceDao dao;
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private DistanceRepository distanceRepository;
 
     public DistanceCalculateServiceImpl(CityDistanceDao dao) {
         this.dao = dao;
@@ -31,29 +35,6 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
 
     @Override
     public List<CityDtoRest> getAllCities() {
-
-        City city = new City("London", 12.25, 32.244);
-        logger.info("id {} name {} longitude {} latitude {}",
-                city.getId(),
-                city.getName(),
-                city.getLatitude(),
-                city.getLongitude());
-        City returnCity = dao.saveCity(city);
-        logger.info("id {} name {} longitude {} latitude {}",
-                returnCity.getId(),
-                returnCity.getName(),
-                returnCity.getLatitude(),
-                returnCity.getLongitude());
-        System.out.println(returnCity==city);
-        logger.info("id {} name {} longitude {} latitude {}",
-                city.getId(),
-                city.getName(),
-                city.getLatitude(),
-                city.getLongitude());
-        City city2 = new City(city.getId(), "NeyYork", 12.25, 32.244);
-        dao.saveCity(city2);
-        List<City> cities = (List<City>) cityRepository.findAll();
-        cities.forEach(c -> System.out.println(c));
         return null;
     }
 

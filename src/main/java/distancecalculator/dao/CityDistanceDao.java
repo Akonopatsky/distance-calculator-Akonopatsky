@@ -15,4 +15,6 @@ public interface CityDistanceDao {
     long saveCityList(List<City> cityList);
 
     City saveCity(City city);
+
+    Distance saveDistance(Distance distance);
 }

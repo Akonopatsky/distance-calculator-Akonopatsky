@@ -1,8 +1,22 @@
 package distancecalculator.model;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "distances")
 public class Distance {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne(targetEntity = City.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "fromCity_id")
     private City fromCity;
+
+    @OneToOne(targetEntity = City.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "toCity_id")
     private City toCity;
     private double distance;
 
@@ -38,4 +52,26 @@ public class Distance {
         return distance;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Distance)) return false;
+        Distance distance1 = (Distance) o;
+        return Double.compare(distance1.distance, distance) == 0 && fromCity.equals(distance1.fromCity) && toCity.equals(distance1.toCity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fromCity, toCity, distance);
+    }
+
+    @Override
+    public String toString() {
+        return "Distance{" +
+                "id=" + id +
+                ", fromCity=" + fromCity +
+                ", toCity=" + toCity +
+                ", distance=" + distance +
+                '}';
+    }
 }
