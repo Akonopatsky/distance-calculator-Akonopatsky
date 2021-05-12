@@ -56,6 +56,7 @@ class CityDistanceDaoImplTest {
         dao.saveDistance(distance1);
         List<City> cities = (List<City>) cityRepository.findAll();
         cities.forEach(c -> System.out.println(c));
+        City city3 = new City("City333", 123.25, 32.244);
         List<Distance> distances = (List<Distance>) distanceRepository.findAll();
         distances.forEach(System.out::println);
 

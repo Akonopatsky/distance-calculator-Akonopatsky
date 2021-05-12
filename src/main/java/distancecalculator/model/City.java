@@ -12,24 +12,17 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "latitude")
+    @Column(name = "latitude", nullable = false)
     private double latitude;
-    @Column(name = "longitude")
+    @Column(name = "longitude", nullable = false)
     private double longitude;
 
     public City() {
     }
 
     public City(String name, double latitude, double longitude) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public City(long id, String name, double latitude, double longitude) {
-        this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

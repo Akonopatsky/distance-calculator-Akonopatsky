@@ -11,11 +11,11 @@ public class Distance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(targetEntity = City.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToOne(targetEntity = City.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "fromCity_id")
     private City fromCity;
 
-    @OneToOne(targetEntity = City.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToOne(targetEntity = City.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "toCity_id")
     private City toCity;
     private double distance;
@@ -29,12 +29,12 @@ public class Distance {
         this.distance = distance;
     }
 
-    public Distance(long id, City fromCity, City toCity, double distance) {
+/*    public Distance(long id, City fromCity, City toCity, double distance) {
         this.id = id;
         this.fromCity = fromCity;
         this.toCity = toCity;
         this.distance = distance;
-    }
+    }*/
 
     public long getId() {
         return id;
