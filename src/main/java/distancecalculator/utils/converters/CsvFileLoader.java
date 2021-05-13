@@ -1,4 +1,4 @@
-package distancecalculator.converters;
+package distancecalculator.utils.converters;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;

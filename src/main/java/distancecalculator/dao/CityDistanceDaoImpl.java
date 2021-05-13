@@ -2,35 +2,47 @@ package distancecalculator.dao;
 
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class CityDistanceDaoImpl implements CityDistanceDao {
-    @Autowired
-    private CityRepository cityRepository;
-    @Autowired DistanceRepository distanceRepository;
+    private final CityRepository cityRepository;
+    private final DistanceRepository distanceRepository;
+
+    public CityDistanceDaoImpl(CityRepository cityRepository, DistanceRepository distanceRepository) {
+        this.cityRepository = cityRepository;
+        this.distanceRepository = distanceRepository;
+    }
 
     @Override
     public List<City> getAllCities() {
-        return null;
+        return cityRepository.findAll();
     }
 
     @Override
     public Distance getDistance(City fromCity, City toCity) {
-        return null;
+        return distanceRepository.findByFromCityAndToCity(fromCity, toCity);
     }
 
     @Override
-    public long saveDistanceList(List<Distance> distanceList) {
-        return 0;
+    public List<Distance> saveDistanceList(List<Distance> distanceList) {
+        List<Distance> result = new ArrayList<>();
+        for (Distance distance : distanceList) {
+            result.add(distanceRepository.save(distance));
+        }
+        return result;
     }
 
     @Override
-    public long saveCityList(List<City> cityList) {
-        return 0;
+    public List<City> saveCityList(List<City> cityList) {
+        List<City> result = new ArrayList<>();
+        for (City city : cityList) {
+            result.add(cityRepository.save(city));
+        }
+        return result;
     }
 
     @Override

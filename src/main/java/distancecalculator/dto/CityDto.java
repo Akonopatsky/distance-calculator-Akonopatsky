@@ -2,6 +2,7 @@ package distancecalculator.dto;
 
 import distancecalculator.model.City;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -28,27 +29,38 @@ public class CityDto {
         this.longitude = longitude;
     }
 
-    public String getName() {
-        return name;
-    }
-
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
 
+    @XmlElement
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+
+    @XmlElement
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+
+    public double getLatitude() {
+        return latitude;
     }
+
+    public City getCity() {
+        return new City(name, latitude, longitude);
+    }
+
 }

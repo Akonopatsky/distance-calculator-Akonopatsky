@@ -20,3 +20,5 @@ alter table distances
     add constraint FK1cxwem0aecrho2q0kfd2kr4bb
         foreign key (to_city_id)
             references cities (id)
+
+GO

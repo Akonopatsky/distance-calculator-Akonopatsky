@@ -1,14 +1,14 @@
 package distancecalculator.rest.services;
 
 import distancecalculator.dao.CityDistanceDao;
-import distancecalculator.converters.XmlService;
+import distancecalculator.dto.CityDto;
+import distancecalculator.model.City;
+import distancecalculator.utils.converters.XmlService;
 import distancecalculator.dao.CityRepository;
 import distancecalculator.dao.DistanceRepository;
 import distancecalculator.dto.CitiesAndDistancesXML;
 import distancecalculator.dto.CityDtoRest;
 import distancecalculator.dto.DistanceDtoRest;
-import distancecalculator.model.City;
-import distancecalculator.model.Distance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +24,6 @@ import java.util.List;
 public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     private static final Logger logger = LoggerFactory.getLogger(DistanceCalculateServiceImpl.class);
     private CityDistanceDao dao;
-    @Autowired
-    private CityRepository cityRepository;
-    @Autowired
-    private DistanceRepository distanceRepository;
-
     public DistanceCalculateServiceImpl(CityDistanceDao dao) {
         this.dao = dao;
     }
@@ -40,7 +35,6 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
 
     @Override
     public List<DistanceDtoRest> calculateDistance(String calculationType, List<String> fromCities, List<String> toCities) {
-
         return null;
     }
 
@@ -52,7 +46,7 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             CitiesAndDistancesXML citiesAndDistancesXML = XmlService.unMarshalFile(inputStream);
-
+            List<City> cityDtoList = citiesAndDistancesXML.getCityList();
 
         } catch (IOException e) {
             e.printStackTrace();

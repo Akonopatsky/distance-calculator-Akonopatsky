@@ -12,45 +12,62 @@ import java.util.stream.Collectors;
 @XmlRootElement(name = "CityDistanceList")
 public class CitiesAndDistancesXML {
 
-    private List<CityDto> cityList;
+    private List<CityDto> cityDtoList;
     private List<DistanceDto> distanceList;
 
     public CitiesAndDistancesXML() {
-        this.cityList = new ArrayList<>();
+        this.cityDtoList = new ArrayList<>();
         this.distanceList = new ArrayList<>();
     }
 
     public CitiesAndDistancesXML(List<City> cityList, List<Distance> distanceList) {
-        this.cityList = cityList.stream()
+        this.cityDtoList = cityList.stream()
                 .map(city -> new CityDto(city)).collect(Collectors.toList());
         this.distanceList = distanceList.stream()
                 .map(distance -> new DistanceDto(distance)).collect(Collectors.toList());
     }
 
     @XmlElement(name = "city")
-    public void setCityList(List<CityDto> cityDtoList) {
-        this.cityList = cityDtoList;
+    public void setCityDtoList(List<CityDto> cityDtoList) {
+        this.cityDtoList = cityDtoList;
     }
 
     @XmlElement(name = "distance")
-    public void setDistanceList(List<DistanceDto> distanceDtoList) {
+    public void setDistanceDtoList(List<DistanceDto> distanceDtoList) {
         this.distanceList = distanceDtoList;
     }
 
     public void addCity(City city) {
-        this.cityList.add(new CityDto(city));
+        this.cityDtoList.add(new CityDto(city));
     }
 
     public void addDistance(Distance distance) {
         this.distanceList.add(new DistanceDto(distance));
     }
 
-    public List<CityDto> getCityList() {
-        return cityList;
+    public void insertDistanceList(List<Distance> list) {
+        list.forEach(distance -> addDistance(distance));
     }
 
-    public List<DistanceDto> getDistanceList() {
+    public void insertCityList(List<City> list) {
+        list.forEach(city -> addCity(city));
+    }
+
+    public List<CityDto> getCityDtoList() {
+        return cityDtoList;
+    }
+
+    public List<DistanceDto> getDistanceDtoList() {
         return distanceList;
     }
+
+    public List<City> getCityList() {
+        return this.cityDtoList.stream()
+                .map(city -> city.getCity()).collect(Collectors.toList());
+    }
+
+
+
+
 
 }

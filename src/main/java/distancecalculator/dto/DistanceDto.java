@@ -1,6 +1,7 @@
 package distancecalculator.dto;
 
 import distancecalculator.model.Distance;
+import liquibase.pro.packaged.D;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,17 +24,9 @@ public class DistanceDto implements Serializable {
         setDistance(distance.getDistance());
     }
 
-    public String getFromCity() {
-        return fromCity;
-    }
-
     @XmlElement
     public void setFromCity(String fromCity) {
         this.fromCity = fromCity;
-    }
-
-    public String getToCity() {
-        return toCity;
     }
 
     @XmlElement
@@ -41,13 +34,20 @@ public class DistanceDto implements Serializable {
         this.toCity = toCity;
     }
 
-    public double getDistance() {
-        return distance;
-    }
-
     @XmlElement
     public void setDistance(double distance) {
         this.distance = distance;
     }
 
+    public String getFromCity() {
+        return fromCity;
+    }
+
+    public String getToCity() {
+        return toCity;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
 }

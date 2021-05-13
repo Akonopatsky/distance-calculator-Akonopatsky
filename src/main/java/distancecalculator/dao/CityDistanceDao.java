@@ -10,9 +10,9 @@ public interface CityDistanceDao {
 
     Distance getDistance(City fromCity, City toCity);
 
-    long saveDistanceList(List<Distance> distanceList);
+    List<Distance> saveDistanceList(List<Distance> distanceList);
 
-    long saveCityList(List<City> cityList);
+    List<City> saveCityList(List<City> cityList);
 
     City saveCity(City city);
 
