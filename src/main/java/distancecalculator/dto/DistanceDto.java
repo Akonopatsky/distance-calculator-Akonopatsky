@@ -11,26 +11,26 @@ import java.io.Serializable;
 public class DistanceDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String fromCity;
-    private String toCity;
+    private long fromCity;
+    private long toCity;
     private double distance;
 
     public DistanceDto() {
     }
 
     public DistanceDto(Distance distance) {
-        setFromCity(distance.getFromCity().getName());
-        setToCity(distance.getToCity().getName());
+        setFromCity(distance.getFromCity().getId());
+        setToCity(distance.getToCity().getId());
         setDistance(distance.getDistance());
     }
 
     @XmlElement
-    public void setFromCity(String fromCity) {
+    public void setFromCity(long fromCity) {
         this.fromCity = fromCity;
     }
 
     @XmlElement
-    public void setToCity(String toCity) {
+    public void setToCity(long toCity) {
         this.toCity = toCity;
     }
 
@@ -39,11 +39,11 @@ public class DistanceDto implements Serializable {
         this.distance = distance;
     }
 
-    public String getFromCity() {
+    public long getFromCity() {
         return fromCity;
     }
 
-    public String getToCity() {
+    public long getToCity() {
         return toCity;
     }
 

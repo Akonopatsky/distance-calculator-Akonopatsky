@@ -1,12 +1,12 @@
 package distancecalculator.dto;
 
-public class DistanceDtoRest {
+public class DistanceRestDto {
 
     private final String fromCity;
     private final String toCity;
     private final double distance;
 
-    public DistanceDtoRest(String fromCity, String toCity, double distance) {
+    public DistanceRestDto(String fromCity, String toCity, double distance) {
         this.fromCity = fromCity;
         this.toCity = toCity;
         this.distance = distance;

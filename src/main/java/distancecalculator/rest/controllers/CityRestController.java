@@ -1,9 +1,8 @@
 package distancecalculator.rest.controllers;
 
 import distancecalculator.dao.CityDistanceDao;
-import distancecalculator.dto.CityDtoRest;
-import distancecalculator.dto.DistanceDtoRest;
-import distancecalculator.model.City;
+import distancecalculator.dto.CityRestDto;
+import distancecalculator.dto.DistanceRestDto;
 import distancecalculator.rest.services.DistanceCalculateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +25,13 @@ public class CityRestController {
     }
 
     @GetMapping({"/api/cities", "/api/city/list"})
-    public List<CityDtoRest> getAllCities() {
+    public List<CityRestDto> getAllCities() {
         logger.info("get cities");
         return distanceCalculateService.getAllCities();
     }
 
     @GetMapping("/api/distances")
-    public List<DistanceDtoRest> calculateDistances(
+    public List<DistanceRestDto> calculateDistances(
             @RequestParam(name = "calculationType") String calculationType,
             @RequestParam(name = "fromCities") List<String> fromCities,
             @RequestParam(name = "toCities") List<String> toCities

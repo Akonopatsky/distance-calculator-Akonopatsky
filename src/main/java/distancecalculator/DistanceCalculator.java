@@ -1,7 +1,6 @@
 package distancecalculator;
 
 import distancecalculator.dao.CityDistanceDao;
-import distancecalculator.model.City;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;

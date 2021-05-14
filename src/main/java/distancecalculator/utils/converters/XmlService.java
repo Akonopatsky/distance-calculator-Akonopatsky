@@ -14,15 +14,16 @@ import java.io.*;
 public class XmlService {
     private static final Logger logger = LoggerFactory.getLogger(XmlService.class);
 
-    public static CitiesAndDistancesXML unMarshalFile(InputStream inputStream) throws JAXBException, IOException {
+    public static CitiesAndDistancesXML unMarshal(InputStream inputStream) throws JAXBException, IOException {
         JAXBContext jaxbContext = JAXBContext.newInstance(CitiesAndDistancesXML.class);
         return (CitiesAndDistancesXML) jaxbContext.createUnmarshaller().unmarshal(inputStream);
     }
 
-    public static void marshal(CitiesAndDistancesXML citiesAndDistancesXML, File file) throws JAXBException {
+    public static void marshalInFile(CitiesAndDistancesXML citiesAndDistancesXML, File file) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(CitiesAndDistancesXML.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(citiesAndDistancesXML, file);
     }
+
 }

@@ -1,17 +1,13 @@
 package distancecalculator.rest.services;
 
 import distancecalculator.dao.CityDistanceDao;
-import distancecalculator.dto.CityDto;
 import distancecalculator.model.City;
 import distancecalculator.utils.converters.XmlService;
-import distancecalculator.dao.CityRepository;
-import distancecalculator.dao.DistanceRepository;
 import distancecalculator.dto.CitiesAndDistancesXML;
-import distancecalculator.dto.CityDtoRest;
-import distancecalculator.dto.DistanceDtoRest;
+import distancecalculator.dto.CityRestDto;
+import distancecalculator.dto.DistanceRestDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,22 +15,27 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DistanceCalculateServiceImpl implements DistanceCalculateService {
     private static final Logger logger = LoggerFactory.getLogger(DistanceCalculateServiceImpl.class);
     private CityDistanceDao dao;
+
     public DistanceCalculateServiceImpl(CityDistanceDao dao) {
         this.dao = dao;
     }
 
     @Override
-    public List<CityDtoRest> getAllCities() {
-        return null;
+    public List<CityRestDto> getAllCities() {
+        List<City> cityList = dao.getAllCities();
+        return cityList.stream()
+                .map(c -> new CityRestDto(c.getId(), c.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<DistanceDtoRest> calculateDistance(String calculationType, List<String> fromCities, List<String> toCities) {
+    public List<DistanceRestDto> calculateDistance(String calculationType, List<String> fromCities, List<String> toCities) {
         return null;
     }
 
@@ -45,8 +46,8 @@ public class DistanceCalculateServiceImpl implements DistanceCalculateService {
             InputStream inputStream = multipartFile.getInputStream();
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
-            CitiesAndDistancesXML citiesAndDistancesXML = XmlService.unMarshalFile(inputStream);
-            List<City> cityDtoList = citiesAndDistancesXML.getCityList();
+            CitiesAndDistancesXML citiesAndDistancesXML = XmlService.unMarshal(inputStream);
+            //List<City> cityDtoList = citiesAndDistancesXML.getCityList();
 
         } catch (IOException e) {
             e.printStackTrace();

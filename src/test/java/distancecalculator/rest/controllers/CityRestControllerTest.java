@@ -1,7 +1,7 @@
 package distancecalculator.rest.controllers;
 
-import distancecalculator.dto.CityDtoRest;
-import distancecalculator.dto.DistanceDtoRest;
+import distancecalculator.dto.CityRestDto;
+import distancecalculator.dto.DistanceRestDto;
 import distancecalculator.rest.services.DistanceCalculateService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,8 +35,8 @@ class CityRestControllerTest {
     void getAllCities() throws Exception {
         given(distanceCalculateService.getAllCities()).willReturn(
                 Arrays.asList(
-                        new CityDtoRest(1, "London"),
-                        new CityDtoRest(2, "Samara"))
+                        new CityRestDto(1, "London"),
+                        new CityRestDto(2, "Samara"))
         );
         mvc.perform(get("/api/cities"))
                 .andExpect(status().isOk());
@@ -51,7 +51,7 @@ class CityRestControllerTest {
                 Arrays.asList("London"),
                 Arrays.asList("Samara")
         ))
-                .willReturn(Arrays.asList(new DistanceDtoRest("London", "Samara", 3300))
+                .willReturn(Arrays.asList(new DistanceRestDto("London", "Samara", 3300))
         );
         mvc.perform(get("/api/distances")
                 .param("calculationType", "all")

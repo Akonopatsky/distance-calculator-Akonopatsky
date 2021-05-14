@@ -1,34 +1,45 @@
 package distancecalculator.utils;
 
+import distancecalculator.dao.CityDistanceDao;
+import distancecalculator.dto.CitiesAndDistancesXML;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
-import distancecalculator.utils.converters.CsvFileLoader;
+import distancecalculator.utils.converters.CsvFileParser;
+import distancecalculator.utils.converters.XmlService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.xml.bind.JAXBException;
+import java.io.File;
 import java.util.*;
 
+@Component
 public class GeneratorTestData {
-    public static void main(String[] args) throws JAXBException {
-        List<City> city500list = CsvFileLoader.readFromCSV("cities.csv", ';');
-/*        List<Distance> randDistanceList = GeneratorTestData.getRandomSet(city500list, city500list.size()/2);
+    @Autowired
+    private CityDistanceDao dao;
+
+    public static void main(String[] args) throws Exception {
+        GeneratorTestData generatorTestData = new GeneratorTestData();
+        generatorTestData.createFileFrom("citiest.csv");
+    }
+
+    public void createFileFrom(String fileName) throws Exception {
+        List<City> cityList = CsvFileParser.readFromCSV(fileName, ';');
+        dao.saveCityList(cityList);
         CitiesAndDistancesXML citiesAndDistancesXML = new CitiesAndDistancesXML();
-        citiesAndDistancesXML.insertCities(city500list);
-        citiesAndDistancesXML.insertDistances(randDistanceList);
+        citiesAndDistancesXML.insertCityList(cityList);
+        File file = new File("./test2.xml");
+        XmlService.marshalInFile(citiesAndDistancesXML, file);
+    }
+
+    public void generate() throws Exception{
+        List<City> city500list = CsvFileParser.readFromCSV("citiest.csv", ';');
+        dao.saveCityList(city500list);
+        List<Distance> randDistanceList = GeneratorTestData.getRandomSet(city500list, city500list.size() / 2);
+        CitiesAndDistancesXML citiesAndDistancesXML = new CitiesAndDistancesXML();
+        citiesAndDistancesXML.insertCityList(city500list);
+        citiesAndDistancesXML.insertDistanceList(randDistanceList);
         File file = new File("bigtest.xml");
-        XmlService.marshal(citiesAndDistancesXML, file );*/
-        City a = new City();
-        City b = new City();
-        List<City> londons = new ArrayList<>();
-        for (City city : city500list) {
-            if (city.getName().equals("London")) {
-                a = city;
-                londons.add(city);
-            }
-            if (city.getName().equals("Paris")) b = city;
-        }
-        londons.forEach(System.out::println);
-        Distance distance = CalculateService.calculate(a, b);
-        System.out.println(distance);
+        XmlService.marshalInFile(citiesAndDistancesXML, file);
     }
 
     private static List<Distance> getRandomSet(List<City> list, int quantity) {
