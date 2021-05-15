@@ -1,6 +1,5 @@
 package distancecalculator.dao;
 
-import distancecalculator.DistanceCalculator;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 

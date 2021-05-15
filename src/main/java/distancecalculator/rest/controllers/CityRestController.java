@@ -19,8 +19,6 @@ import java.util.List;
 public class CityRestController {
     private static final Logger logger = LoggerFactory.getLogger(CityRestController.class);
     private final RestService restService;
-    @Autowired
-    private CityDistanceDao cityDistanceDao;
 
     public CityRestController(RestService restService) {
         this.restService = restService;
@@ -53,6 +51,12 @@ public class CityRestController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping({"/api/post/cities"})
+    public List<CityRestDto> getAllCitiesPost() {
+        logger.info("get cities");
+        return restService.getAllCities();
     }
 
 }

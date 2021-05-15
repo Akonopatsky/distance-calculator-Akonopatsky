@@ -19,7 +19,7 @@ public class GeneratorTestData {
 
     public static void main(String[] args) throws Exception {
         GeneratorTestData generatorTestData = new GeneratorTestData();
-        generatorTestData.createFileFrom("citiest.csv");
+        //generatorTestData.createFileFrom("citiest.csv");
     }
 
     public void createFileFrom(String fileName) throws Exception {
@@ -31,33 +31,31 @@ public class GeneratorTestData {
         XmlService.marshalInFile(xmlDto, file);
     }
 
-    public void generate() throws Exception{
-        List<City> city500list = CsvFileParser.readFromCSV("citiest.csv", ';');
-        dao.saveCityList(city500list);
-        List<Distance> randDistanceList = GeneratorTestData.getRandomSet(city500list, city500list.size() / 2);
-        XmlDto xmlDto = new XmlDto(city500list, randDistanceList);
+    public void generate() throws Exception {
+        List<City> citylist = CsvFileParser.readFromCSV("cities10k.csv", ';');
+        dao.saveCityList(citylist);
+        List<Distance> randDistanceList = GeneratorTestData.getRandomSet(citylist, 1_000_000);
+        XmlDto xmlDto = new XmlDto(citylist, randDistanceList);
         File file = new File("bigtest.xml");
         XmlService.marshalInFile(xmlDto, file);
     }
 
     private static List<Distance> getRandomSet(List<City> list, int quantity) {
         List<Distance> distanceList = new ArrayList<>(quantity);
-        List<City> fromList = new ArrayList<>(list);
         List<City> toList = new ArrayList<>(list);
-        Collections.shuffle(fromList);
         Collections.shuffle(toList);
-        for (int i = 0; i < quantity; i++) {
-            int fromIndex = toList.size() - 1;
-            int toIndex = toList.size() - 1;
-            City fromCity = fromList.get(fromIndex);
-            City toCity = toList.get(toIndex);
-            while (fromCity.equals(toCity)) {
-                toIndex--;
-                toCity = toList.get(toIndex);
+        Random random = new Random();
+        int toIndex = 0;
+        City toCity = null;
+        for (City city : list) {
+            for (int i = 0; i < quantity / list.size(); i++) {
+                do {
+                    toIndex = random.nextInt(toList.size());
+                    toCity = toList.get(toIndex);
+                }
+                while (city.equals(toCity));
+                distanceList.add(CalculateService.calculate(city, toCity));
             }
-            distanceList.add(CalculateService.calculate(fromCity, toCity));
-            fromList.remove(fromIndex);
-            toList.remove(toIndex);
         }
         return distanceList;
     }

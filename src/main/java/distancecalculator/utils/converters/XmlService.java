@@ -19,10 +19,17 @@ public class XmlService {
         return (XmlDto) jaxbContext.createUnmarshaller().unmarshal(inputStream);
     }
 
+    public static void marshal(XmlDto xmlDto, OutputStream outputStream) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
+        marshaller.marshal(xmlDto, outputStream);
+    }
+
     public static void marshalInFile(XmlDto xmlDto, File file) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
         marshaller.marshal(xmlDto, file);
     }
 }
