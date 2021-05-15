@@ -29,13 +29,6 @@ public class Distance {
         this.distance = distance;
     }
 
-/*    public Distance(long id, City fromCity, City toCity, double distance) {
-        this.id = id;
-        this.fromCity = fromCity;
-        this.toCity = toCity;
-        this.distance = distance;
-    }*/
-
     public long getId() {
         return id;
     }

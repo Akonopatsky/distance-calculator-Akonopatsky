@@ -1,4 +1,6 @@
-package distancecalculator.dto;
+package distancecalculator.rest.dto;
+
+import distancecalculator.model.City;
 
 public class CityRestDto {
     private final long id;
@@ -7,6 +9,11 @@ public class CityRestDto {
     public CityRestDto(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public CityRestDto(City city) {
+        this.id = city.getId();
+        this.name = city.getName();
     }
 
     public long getId() {

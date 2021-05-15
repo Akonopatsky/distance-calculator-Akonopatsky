@@ -1,7 +1,7 @@
 package distancecalculator.utils;
 
 import distancecalculator.dao.CityDistanceDao;
-import distancecalculator.dto.CitiesAndDistancesXML;
+import distancecalculator.rest.dto.XmlDto;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import distancecalculator.utils.converters.CsvFileParser;
@@ -25,21 +25,19 @@ public class GeneratorTestData {
     public void createFileFrom(String fileName) throws Exception {
         List<City> cityList = CsvFileParser.readFromCSV(fileName, ';');
         dao.saveCityList(cityList);
-        CitiesAndDistancesXML citiesAndDistancesXML = new CitiesAndDistancesXML();
-        citiesAndDistancesXML.insertCityList(cityList);
+        XmlDto xmlDto = new XmlDto();
+        xmlDto.insertCityList(cityList);
         File file = new File("./test2.xml");
-        XmlService.marshalInFile(citiesAndDistancesXML, file);
+        XmlService.marshalInFile(xmlDto, file);
     }
 
     public void generate() throws Exception{
         List<City> city500list = CsvFileParser.readFromCSV("citiest.csv", ';');
         dao.saveCityList(city500list);
         List<Distance> randDistanceList = GeneratorTestData.getRandomSet(city500list, city500list.size() / 2);
-        CitiesAndDistancesXML citiesAndDistancesXML = new CitiesAndDistancesXML();
-        citiesAndDistancesXML.insertCityList(city500list);
-        citiesAndDistancesXML.insertDistanceList(randDistanceList);
+        XmlDto xmlDto = new XmlDto(city500list, randDistanceList);
         File file = new File("bigtest.xml");
-        XmlService.marshalInFile(citiesAndDistancesXML, file);
+        XmlService.marshalInFile(xmlDto, file);
     }
 
     private static List<Distance> getRandomSet(List<City> list, int quantity) {

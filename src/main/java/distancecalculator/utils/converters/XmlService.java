@@ -1,7 +1,7 @@
 package distancecalculator.utils.converters;
 
 
-import distancecalculator.dto.CitiesAndDistancesXML;
+import distancecalculator.rest.dto.XmlDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,16 +14,15 @@ import java.io.*;
 public class XmlService {
     private static final Logger logger = LoggerFactory.getLogger(XmlService.class);
 
-    public static CitiesAndDistancesXML unMarshal(InputStream inputStream) throws JAXBException, IOException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(CitiesAndDistancesXML.class);
-        return (CitiesAndDistancesXML) jaxbContext.createUnmarshaller().unmarshal(inputStream);
+    public static XmlDto unMarshal(InputStream inputStream) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
+        return (XmlDto) jaxbContext.createUnmarshaller().unmarshal(inputStream);
     }
 
-    public static void marshalInFile(CitiesAndDistancesXML citiesAndDistancesXML, File file) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(CitiesAndDistancesXML.class);
+    public static void marshalInFile(XmlDto xmlDto, File file) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(citiesAndDistancesXML, file);
+        marshaller.marshal(xmlDto, file);
     }
-
 }

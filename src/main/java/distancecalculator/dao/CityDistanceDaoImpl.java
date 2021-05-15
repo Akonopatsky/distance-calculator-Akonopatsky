@@ -1,11 +1,13 @@
 package distancecalculator.dao;
 
+import distancecalculator.exceptions.DistanceCalculatorException;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CityDistanceDaoImpl implements CityDistanceDao {
@@ -20,6 +22,11 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     @Override
     public List<City> getAllCities() {
         return cityRepository.findAll();
+    }
+
+    @Override
+    public City getById(long id) throws DistanceCalculatorException {
+        return cityRepository.findById(id).orElseThrow(() -> new DistanceCalculatorException("there is no city id " + id));
     }
 
     @Override

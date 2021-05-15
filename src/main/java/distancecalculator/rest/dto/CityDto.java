@@ -1,4 +1,4 @@
-package distancecalculator.dto;
+package distancecalculator.rest.dto;
 
 import distancecalculator.model.City;
 

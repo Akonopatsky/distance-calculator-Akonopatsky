@@ -1,12 +1,16 @@
 package distancecalculator.dao;
 
+import distancecalculator.exceptions.DistanceCalculatorException;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 
 import java.util.List;
 
+
 public interface CityDistanceDao {
     List<City> getAllCities();
+
+    City getById(long id) throws DistanceCalculatorException;
 
     Distance getDistance(City fromCity, City toCity);
 
