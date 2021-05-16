@@ -2,8 +2,8 @@ package distancecalculator.rest.services;
 
 import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.rest.dto.XmlDto;
-import distancecalculator.rest.dto.CityDto;
-import distancecalculator.rest.dto.DistanceDto;
+import distancecalculator.rest.dto.CityLoadDto;
+import distancecalculator.rest.dto.DistanceLoadDto;
 
 
 import distancecalculator.model.City;
@@ -25,16 +25,16 @@ public class UploadService {
 
     public void uploadData(XmlDto xmlDto) {
         Map<Long, City> cityMap = new HashMap<>(xmlDto.getCityDtoMap().size());
-        for (Map.Entry<Long, CityDto> entry : xmlDto.getCityDtoMap().entrySet()) {
+        for (Map.Entry<Long, CityLoadDto> entry : xmlDto.getCityDtoMap().entrySet()) {
             cityMap.put(entry.getKey(), entry.getValue().getCity());
         }
         List<Distance> distanceList = new ArrayList<>(xmlDto.getDistanceDtoList().size());
-        for (DistanceDto distanceDto : xmlDto.getDistanceDtoList()) {
+        for (DistanceLoadDto distanceDto : xmlDto.getDistanceDtoList()) {
             City fromCity = cityMap.get(distanceDto.getFromCity());
             City toCity = cityMap.get(distanceDto.getToCity());
             distanceList.add(new Distance(fromCity, toCity, distanceDto.getDistance()));
         }
-        dao.saveCityList(new ArrayList<City>(cityMap.values()));
+        dao.saveCityList(new ArrayList<>(cityMap.values()));
         dao.saveDistanceList(distanceList);
     }
 }

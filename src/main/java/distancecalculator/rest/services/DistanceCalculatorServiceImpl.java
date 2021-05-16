@@ -70,6 +70,6 @@ public class DistanceCalculatorServiceImpl implements DistanceCalculatorService 
             XmlService.marshal(cityResponseDtoList, outputStream, CityResponseDtoList.class);
         } catch (JAXBException e) {
             e.printStackTrace();
-        };
+        }
     }
 }

@@ -14,8 +14,8 @@ import java.util.Map;
 @XmlRootElement(name = "CityDistanceList")
 public class XmlDto {
 
-    private Map<Long, CityDto> cityDtoMap = new HashMap<>();
-    private List<DistanceDto> distanceList = new ArrayList<>();
+    private Map<Long, CityLoadDto> cityDtoMap = new HashMap<>();
+    private List<DistanceLoadDto> distanceList = new ArrayList<>();
 
     public XmlDto() {
     }
@@ -26,12 +26,12 @@ public class XmlDto {
     }
 
     @XmlElement(name = "city")
-    public void setCityDtoMap(Map<Long, CityDto> cityDtoMap) {
+    public void setCityDtoMap(Map<Long, CityLoadDto> cityDtoMap) {
         this.cityDtoMap = cityDtoMap;
     }
 
     @XmlElement(name = "distance")
-    public void setDistanceDtoList(List<DistanceDto> distanceDtoList) {
+    public void setDistanceDtoList(List<DistanceLoadDto> distanceDtoList) {
         this.distanceList = distanceDtoList;
     }
 
@@ -39,7 +39,7 @@ public class XmlDto {
         if (city.getId() == 0) {
             throw new DistanceCalculatorException("add city id = 0, id is necessary for XML DTO");
         }
-        this.cityDtoMap.put(city.getId(), new CityDto(city));
+        this.cityDtoMap.put(city.getId(), new CityLoadDto(city));
     }
 
     private void addDistance(Distance distance) throws DistanceCalculatorException {
@@ -48,7 +48,7 @@ public class XmlDto {
                     + distance.getFromCity().getId()
                     + " in cityDtoMap ");
         }
-        distanceList.add(new DistanceDto(distance));
+        distanceList.add(new DistanceLoadDto(distance));
     }
 
     public void insertDistanceList(List<Distance> list) throws DistanceCalculatorException {
@@ -63,11 +63,11 @@ public class XmlDto {
         }
     }
 
-    public Map<Long, CityDto> getCityDtoMap() {
+    public Map<Long, CityLoadDto> getCityDtoMap() {
         return cityDtoMap;
     }
 
-    public List<DistanceDto> getDistanceDtoList() {
+    public List<DistanceLoadDto> getDistanceDtoList() {
         return distanceList;
     }
 }

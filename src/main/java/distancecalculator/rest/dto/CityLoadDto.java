@@ -8,22 +8,22 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "city")
 @XmlType(propOrder = {"name", "latitude", "longitude"})
-public class CityDto {
+public class CityLoadDto {
     private static final long serialVersionUID = 1L;
     private String name;
     private double latitude;
     private double longitude;
 
-    public CityDto() {
+    public CityLoadDto() {
     }
 
-    public CityDto(City city) {
+    public CityLoadDto(City city) {
         setName(city.getName());
         setLatitude(city.getLatitude());
         setLongitude(city.getLongitude());
     }
 
-    public CityDto(String name, double latitude, double longitude) {
+    public CityLoadDto(String name, double latitude, double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

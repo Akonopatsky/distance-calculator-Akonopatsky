@@ -66,13 +66,12 @@ public class DistanceService {
         return result;
     }
 
-    public Distance getCrowFlight(City fromCity, City toCity) throws DistanceCalculatorException {
+    public Distance getCrowFlight(City fromCity, City toCity) {
         return Calculator.calculate(fromCity, toCity);
     }
 
     public Distance getDistanceMatrix(City fromCity, City toCity) throws DistanceCalculatorException {
-        Distance distance = dao.getDistance(fromCity, toCity)
+        return dao.getDistance(fromCity, toCity)
                 .orElseThrow(() ->new DistanceCalculatorException("there is no DistanceMatrix "+ fromCity.getName() + toCity.getName()));
-        return distance;
     }
 }

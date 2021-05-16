@@ -1,24 +1,23 @@
 package distancecalculator.rest.dto;
 
 import distancecalculator.model.Distance;
-import liquibase.pro.packaged.D;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @XmlRootElement
-public class DistanceDto implements Serializable {
+public class DistanceLoadDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long fromCity;
     private long toCity;
     private double distance;
 
-    public DistanceDto() {
+    public DistanceLoadDto() {
     }
 
-    public DistanceDto(Distance distance) {
+    public DistanceLoadDto(Distance distance) {
         setFromCity(distance.getFromCity().getId());
         setToCity(distance.getToCity().getId());
         setDistance(distance.getDistance());

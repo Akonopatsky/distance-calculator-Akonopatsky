@@ -25,8 +25,7 @@ public class Calculator {
                         sinLatitudeA * sinLatitudeB
         ) * AVERAGE_RADIUS_OF_EARTH_KM;
 
-        Distance result = new Distance(fromCity, toCity, distance);
-        return result;
+        return new Distance(fromCity, toCity, distance);
     }
 
 }

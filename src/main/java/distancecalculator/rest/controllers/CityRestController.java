@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@RequestMapping("/api")
 @RestController
 public class CityRestController {
     private static final Logger logger = LoggerFactory.getLogger(CityRestController.class);
@@ -20,13 +21,13 @@ public class CityRestController {
         this.distanceCalculatorService = distanceCalculatorService;
     }
 
-    @GetMapping({"/api/cities", "/api/city/list"})
+    @GetMapping({"/cities", "/api/city/list"})
     public List<CityRestDto> getAllCities() {
         logger.info("get cities");
         return distanceCalculatorService.getAllCities();
     }
 
-    @GetMapping("/api/distances")
+    @GetMapping("/distances")
     public List<DistanceRestDto> calculateDistances(
             @RequestBody DistanceRequest distanceRequest
             ) throws DistanceCalculatorException {
@@ -39,7 +40,7 @@ public class CityRestController {
     }
 
 
-    @PutMapping("/api/upload")
+    @PutMapping("/upload")
     public ResponseEntity uploadXmlFile(
             @RequestParam(name = "file") MultipartFile file
     ) throws Exception {

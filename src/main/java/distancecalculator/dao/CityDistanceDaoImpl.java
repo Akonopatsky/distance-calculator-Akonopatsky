@@ -5,7 +5,6 @@ import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
