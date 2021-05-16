@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
 public class CityRestDtoList {
     private List<CityRestDto> CityRestDtoList = new ArrayList<>();
 
@@ -17,6 +18,7 @@ public class CityRestDtoList {
         return CityRestDtoList;
     }
 
+    @XmlElement
     public void setCityRestDtoList(List<CityRestDto> cityRestDtoList) {
         this.CityRestDtoList = cityRestDtoList;
     }

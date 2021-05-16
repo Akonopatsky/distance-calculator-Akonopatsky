@@ -24,6 +24,10 @@ public class CityRestDto {
     }
 
     @XmlElement
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setId(String id) {
         this.id = Long.parseLong(id);
     }
