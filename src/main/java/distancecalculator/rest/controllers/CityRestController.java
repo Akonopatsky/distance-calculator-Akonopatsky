@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.io.Writer;
 import java.util.List;
 
 @RestController
@@ -53,9 +55,13 @@ public class CityRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping({"/api/post/cities"})
-    public List<CityRestDto> getAllCitiesPost() {
-        logger.info("get cities");
+    @GetMapping({"/api/stream/cities"})
+    public List<CityRestDto> getAllCities() {
+        logger.info("get cities stream");
+        StreamingResponseBody responseBody = response -> {
+            response.write();
+        }
+
         return restService.getAllCities();
     }
 
