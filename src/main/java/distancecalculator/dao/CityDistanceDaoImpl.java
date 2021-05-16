@@ -4,10 +4,15 @@ import distancecalculator.exceptions.DistanceCalculatorException;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Repository
 public class CityDistanceDaoImpl implements CityDistanceDao {
@@ -60,5 +65,10 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     @Override
     public Distance saveDistance(Distance distance) {
         return distanceRepository.save(distance);
+    }
+
+    @Override
+    public Stream<City> findAllCitiesStream() {
+        return cityRepository.findAllByCustomQueryAndStream();
     }
 }

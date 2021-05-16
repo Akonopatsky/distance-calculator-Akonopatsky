@@ -14,20 +14,20 @@ import java.io.*;
 public class XmlService {
     private static final Logger logger = LoggerFactory.getLogger(XmlService.class);
 
-    public static XmlDto unMarshal(InputStream inputStream) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
-        return (XmlDto) jaxbContext.createUnmarshaller().unmarshal(inputStream);
+    public static<T> T unMarshal(InputStream inputStream, Class<T> clazz) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+        return (T) jaxbContext.createUnmarshaller().unmarshal(inputStream);
     }
 
-    public static void marshal(XmlDto xmlDto, OutputStream outputStream) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
+    public static<T> void marshal(T xmlDto, OutputStream outputStream, Class<T> clazz) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
         marshaller.marshal(xmlDto, outputStream);
     }
 
-    public static void marshalInFile(XmlDto xmlDto, File file) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(XmlDto.class);
+    public static<T> void marshalInFile(T xmlDto, File file, Class<T> clazz) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
         marshaller.marshal(xmlDto, file);

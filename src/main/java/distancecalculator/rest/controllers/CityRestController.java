@@ -55,14 +55,4 @@ public class CityRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping({"/api/stream/cities"})
-    public List<CityRestDto> getAllCities() {
-        logger.info("get cities stream");
-        StreamingResponseBody responseBody = response -> {
-            response.write();
-        }
-
-        return restService.getAllCities();
-    }
-
 }

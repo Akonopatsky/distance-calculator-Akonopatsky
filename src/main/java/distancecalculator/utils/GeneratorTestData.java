@@ -28,7 +28,7 @@ public class GeneratorTestData {
         XmlDto xmlDto = new XmlDto();
         xmlDto.insertCityList(cityList);
         File file = new File("./test2.xml");
-        XmlService.marshalInFile(xmlDto, file);
+        XmlService.marshalInFile(xmlDto, file, XmlDto.class);
     }
 
     public void generate() throws Exception {
@@ -37,7 +37,7 @@ public class GeneratorTestData {
         List<Distance> randDistanceList = GeneratorTestData.getRandomSet(citylist, 1_000_000);
         XmlDto xmlDto = new XmlDto(citylist, randDistanceList);
         File file = new File("bigtest.xml");
-        XmlService.marshalInFile(xmlDto, file);
+        XmlService.marshalInFile(xmlDto, file, XmlDto.class);
     }
 
     private static List<Distance> getRandomSet(List<City> list, int quantity) {
@@ -48,7 +48,7 @@ public class GeneratorTestData {
         int toIndex = 0;
         City toCity = null;
         for (City city : list) {
-            for (int i = 0; i < quantity / list.size(); i++) {
+            for (int i = 0; i < quantity / (list.size()-1); i++) {
                 do {
                     toIndex = random.nextInt(toList.size());
                     toCity = toList.get(toIndex);

@@ -2,9 +2,16 @@ package distancecalculator.rest.dto;
 
 import distancecalculator.model.City;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CityRestDto {
-    private final long id;
-    private final String name;
+    private  long id;
+    private  String name;
+
+    public CityRestDto() {
+    }
 
     public CityRestDto(long id, String name) {
         this.id = id;
@@ -16,6 +23,16 @@ public class CityRestDto {
         this.name = city.getName();
     }
 
+    @XmlElement
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @XmlElement
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
@@ -23,4 +40,6 @@ public class CityRestDto {
     public String getName() {
         return name;
     }
+
+
 }
