@@ -1,4 +1,4 @@
-package distancecalculator.utils;
+package distancecalculator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,16 +9,18 @@ import distancecalculator.rest.dto.DistanceRequest;
 import distancecalculator.rest.dto.XmlDto;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
+import distancecalculator.utils.Calculator;
 import distancecalculator.utils.converters.CsvFileParser;
 import distancecalculator.utils.converters.XmlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
-public class GeneratorTestData {
+public class DataGenerator {
     @Autowired
     private CityDistanceDao dao;
 
@@ -37,12 +39,16 @@ public class GeneratorTestData {
     }
 
     public void generate() throws Exception {
-        List<City> citylist = CsvFileParser.readFromCSV("cities10k.csv", ';');
+        List<City> citylist = CsvFileParser.readFromCSV("cities1k.csv", ';');
         dao.saveCityList(citylist);
-        List<Distance> randDistanceList = GeneratorTestData.getRandomSet(citylist, 1_000_000);
+        List<Distance> randDistanceList = DataGenerator.getRandomSet(citylist, 10_000);
+        dao.saveDistanceList(randDistanceList);
         XmlDto xmlDto = new XmlDto(citylist, randDistanceList);
-        File file = new File("bigtest.xml");
+        File file = new File("src/test/httpreqwests/smalltest.xml");
         XmlService.marshalInFile(xmlDto, file, XmlDto.class);
+        InputStream inputStream = new FileInputStream(file);
+        XmlDto xmlDto1 = XmlService.unMarshal(inputStream, XmlDto.class);
+        System.out.println(xmlDto1.getCityDtoMap().size());
     }
 
     private static List<Distance> getRandomSet(List<City> list, int quantity) {
@@ -59,28 +65,37 @@ public class GeneratorTestData {
                     toCity = toList.get(toIndex);
                 }
                 while (city.equals(toCity));
-                distanceList.add(CalculateService.calculate(city, toCity));
+                distanceList.add(Calculator.calculate(city, toCity));
             }
         }
         return distanceList;
     }
 
-    public String jsont() throws DistanceCalculatorException, JsonProcessingException {
-        City city1 = dao.getById(2);
-        City city2 = dao.getById(3);
-        City city3 = dao.getById(4);
-        CityRestDto cityRestDto1 = new CityRestDto(city1);
-        CityRestDto cityRestDto2 = new CityRestDto(city2);
-        CityRestDto cityRestDto3 = new CityRestDto(city3);
-        List<CityRestDto> fromCities = new ArrayList<>();
-        fromCities.add(cityRestDto1);
-        fromCities.add(cityRestDto2);
-        fromCities.add(cityRestDto3);
-        List<CityRestDto> toCities = new ArrayList<>(fromCities);
+    public String jsonT() throws DistanceCalculatorException, JsonProcessingException {
+
+        List<City> fromCitylist = new ArrayList<>();
+        List<City> toCityList = new ArrayList<>();
+        fromCitylist.add(dao.getById(2));
+        fromCitylist.add(dao.getById(3));
+        fromCitylist.add(dao.getById(4));
+        toCityList.add(dao.getById(5));
+        toCityList.add(dao.getById(6));
+        toCityList.add(dao.getById(7));
+        toCityList.add(dao.getById(8));
+        List<CityRestDto> fromCitiesRes = fromCitylist.stream().map(c -> new CityRestDto(c)).collect(Collectors.toList());
+        List<CityRestDto> toCitiesRest = toCityList.stream().map(c -> new CityRestDto(c)).collect(Collectors.toList());
+        for (City fromCity : fromCitylist) {
+            for (City toCity : toCityList) {
+                if (!fromCity.equals(toCity)) {
+                    dao.saveDistance(new Distance(fromCity, toCity, Calculator.calculate(fromCity, toCity).getDistance() + 7));
+                }
+            }
+        }
         DistanceRequest distanceRequest = new DistanceRequest();
         distanceRequest.setCalculationType("CROW_FLIGHT");
-        distanceRequest.setFromCities(fromCities);
-        distanceRequest.setToCities(toCities);
+        distanceRequest.setFromCities(fromCitiesRes);
+        distanceRequest.setToCities(toCitiesRest);
+
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(distanceRequest);
         return jsonString;

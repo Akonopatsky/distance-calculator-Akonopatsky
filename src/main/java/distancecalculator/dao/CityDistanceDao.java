@@ -5,8 +5,8 @@ import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.OutputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 
@@ -16,7 +16,7 @@ public interface CityDistanceDao {
 
     City getById(long id) throws DistanceCalculatorException;
 
-    Distance getDistance(City fromCity, City toCity);
+    Optional<Distance> getDistance(City fromCity, City toCity);
 
     List<Distance> saveDistanceList(List<Distance> distanceList);
 

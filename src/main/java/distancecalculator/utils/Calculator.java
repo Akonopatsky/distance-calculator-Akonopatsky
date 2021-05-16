@@ -3,7 +3,7 @@ package distancecalculator.utils;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 
-public class CalculateService {
+public class Calculator {
     public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
 
     public static Distance calculate(City fromCity, City toCity) {

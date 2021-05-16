@@ -4,11 +4,7 @@ import distancecalculator.exceptions.DistanceCalculatorException;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,26 +31,19 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     }
 
     @Override
-    public Distance getDistance(City fromCity, City toCity) {
+    public Optional<Distance> getDistance(City fromCity, City toCity) {
         return distanceRepository.findByFromCityAndToCity(fromCity, toCity);
     }
 
-    @Override
-    public List<Distance> saveDistanceList(List<Distance> distanceList) {
-        List<Distance> result = new ArrayList<>();
-        for (Distance distance : distanceList) {
-            result.add(distanceRepository.save(distance));
-        }
-        return result;
-    }
 
     @Override
+    public List<Distance> saveDistanceList(List<Distance> distanceList) {
+        return (List<Distance>)distanceRepository.saveAll(distanceList);
+    }
+
+       @Override
     public List<City> saveCityList(List<City> cityList) {
-        List<City> result = new ArrayList<>();
-        for (City city : cityList) {
-            result.add(cityRepository.save(city));
-        }
-        return result;
+        return (List<City>) cityRepository.saveAll(cityList);
     }
 
     @Override

@@ -3,7 +3,6 @@ package distancecalculator.rest.services;
 import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.exceptions.DistanceCalculatorException;
 import distancecalculator.model.City;
-import distancecalculator.model.Distance;
 import distancecalculator.rest.dto.*;
 import distancecalculator.utils.converters.XmlService;
 import org.slf4j.Logger;
@@ -20,13 +19,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class RestServiceImpl implements RestService {
-    private static final Logger logger = LoggerFactory.getLogger(RestServiceImpl.class);
+public class DistanceCalculatorServiceImpl implements DistanceCalculatorService {
+    private static final Logger logger = LoggerFactory.getLogger(DistanceCalculatorServiceImpl.class);
     private final CityDistanceDao dao;
     private final DistanceService distanceService;
     private final UploadService uploadService;
 
-    public RestServiceImpl(
+    public DistanceCalculatorServiceImpl(
             CityDistanceDao dao,
             DistanceService distanceService,
             UploadService uploadService
@@ -57,8 +56,6 @@ public class RestServiceImpl implements RestService {
     public void upload(MultipartFile multipartFile) throws Exception {
         logger.info("try to parse file : {}", multipartFile.getName());
         InputStream inputStream = multipartFile.getInputStream();
-        byte[] buffer = new byte[inputStream.available()];
-        inputStream.read(buffer);
         XmlDto xmlDto = XmlService.unMarshal(inputStream, XmlDto.class);
         uploadService.uploadData(xmlDto);
     }

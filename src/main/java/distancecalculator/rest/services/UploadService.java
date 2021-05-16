@@ -36,9 +36,5 @@ public class UploadService {
         }
         dao.saveCityList(new ArrayList<City>(cityMap.values()));
         dao.saveDistanceList(distanceList);
-
     }
-
-
-
 }

@@ -1,6 +1,6 @@
 package distancecalculator.rest.controllers;
 
-import distancecalculator.rest.services.RestService;
+import distancecalculator.rest.services.DistanceCalculatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -13,17 +13,17 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 @RestController
 public class CityStreamRestController {
     private static final Logger logger = LoggerFactory.getLogger(CityStreamRestController.class);
-    private final RestService restService;
+    private final DistanceCalculatorService distanceCalculatorService;
 
-    public CityStreamRestController(RestService restService) {
-        this.restService = restService;
+    public CityStreamRestController(DistanceCalculatorService distanceCalculatorService) {
+        this.distanceCalculatorService = distanceCalculatorService;
     }
 
     @GetMapping({"/cities"})
     public ResponseEntity<StreamingResponseBody> getAllCitiesStream() {
         logger.info("get cities stream");
         StreamingResponseBody responseBody = response -> {
-            restService.writeCitiesToStream(response);
+            distanceCalculatorService.writeCitiesToStream(response);
             response.flush();
         };
         return ResponseEntity.ok()

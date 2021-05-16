@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-public interface RestService {
+public interface DistanceCalculatorService {
     List<CityRestDto> getAllCities();
 
     List<DistanceRestDto> calculateDistance(CalculationType calculationType, List<CityRestDto> fromCities, List<CityRestDto> toCities) throws DistanceCalculatorException;

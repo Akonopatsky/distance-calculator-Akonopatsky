@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.*;
 
 @Service
@@ -16,7 +17,9 @@ public class XmlService {
 
     public static<T> T unMarshal(InputStream inputStream, Class<T> clazz) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
-        return (T) jaxbContext.createUnmarshaller().unmarshal(inputStream);
+        logger.info("create Unmarshaller for {}", clazz.getName());
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return (T) unmarshaller.unmarshal(inputStream);
     }
 
     public static<T> void marshal(T xmlDto, OutputStream outputStream, Class<T> clazz) throws JAXBException {

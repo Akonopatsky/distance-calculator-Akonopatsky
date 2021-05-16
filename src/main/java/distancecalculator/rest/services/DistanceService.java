@@ -8,7 +8,7 @@ import distancecalculator.model.Distance;
 import distancecalculator.rest.dto.CalculationType;
 import distancecalculator.rest.dto.CityRestDto;
 import distancecalculator.rest.dto.DistanceRestDto;
-import distancecalculator.utils.CalculateService;
+import distancecalculator.utils.Calculator;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -67,10 +67,12 @@ public class DistanceService {
     }
 
     public Distance getCrowFlight(City fromCity, City toCity) throws DistanceCalculatorException {
-        return CalculateService.calculate(fromCity, toCity);
+        return Calculator.calculate(fromCity, toCity);
     }
 
     public Distance getDistanceMatrix(City fromCity, City toCity) throws DistanceCalculatorException {
-        return dao.getDistance(fromCity, toCity);
+        Distance distance = dao.getDistance(fromCity, toCity)
+                .orElseThrow(() ->new DistanceCalculatorException("there is no DistanceMatrix "+ fromCity.getName() + toCity.getName()));
+        return distance;
     }
 }
