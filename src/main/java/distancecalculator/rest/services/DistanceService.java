@@ -38,14 +38,13 @@ public class DistanceService {
                         result.add(getDistanceMatrixRest(fromCity, toCity));
                         result.add(getCrowFlightRest(fromCity, toCity));
                     }
+                    if (calculationType == CalculationType.CROW_FLIGHT) {
+                        result.add(getCrowFlightRest(fromCity, toCity));
+                    }
+                    if (calculationType == CalculationType.DISTANCE_MATRIX) {
+                        result.add(getDistanceMatrixRest(fromCity, toCity));
+                    }
                 }
-                if (calculationType == CalculationType.CROW_FLIGHT) {
-                    result.add(getCrowFlightRest(fromCity, toCity));
-                }
-                if (calculationType == CalculationType.DISTANCE_MATRIX) {
-                    result.add(getDistanceMatrixRest(fromCity, toCity));
-                }
-
             }
         }
         return result;

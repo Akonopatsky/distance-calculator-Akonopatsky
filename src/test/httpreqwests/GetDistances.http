@@ -1,0 +1,11 @@
+GET localhost:8081/api/distances
+Content-Type: application/json
+
+{"calculationType":"CROW_FLIGHT",
+  "fromCities":[{"id":2,"name":"Andorra la Vella"},
+  {"id":3,"name":"Umm Al Quwain City"},
+  {"id":4,"name":"Ras Al Khaimah City"}],
+  "toCities":[{"id":2,"name":"Andorra la Vella"},
+    {"id":3,"name":"Umm Al Quwain City"},
+    {"id":4,"name":"Ras Al Khaimah City"}]}
+

@@ -1,5 +1,7 @@
 package distancecalculator.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import distancecalculator.exceptions.DistanceCalculatorException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +22,12 @@ class GeneratorTestDataTest {
     @Test
     void createFelt() throws Exception {
         generatorTestData.createFileFrom("./citiest.csv");
+    }
+
+    @Test
+    void generateJson() throws JsonProcessingException, DistanceCalculatorException {
+        System.out.println("generatorTestData JSON _________________________");
+        System.out.println(generatorTestData.jsont());
+        System.out.println("generatorTestData JSON _________________________");
     }
 }

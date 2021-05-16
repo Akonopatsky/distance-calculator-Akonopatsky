@@ -1,21 +1,18 @@
 package distancecalculator.rest.controllers;
 
-import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.exceptions.DistanceCalculatorException;
-import distancecalculator.rest.dto.CalculationType;
-import distancecalculator.rest.dto.CityRestDto;
-import distancecalculator.rest.dto.DistanceRestDto;
+import distancecalculator.rest.dto.*;
 import distancecalculator.rest.services.RestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import java.io.Writer;
 import java.util.List;
+import java.util.Map;
+
+import static distancecalculator.rest.dto.CalculationType.CROW_FLIGHT;
 
 @RestController
 public class CityRestController {
@@ -34,13 +31,16 @@ public class CityRestController {
 
     @GetMapping("/api/distances")
     public List<DistanceRestDto> calculateDistances(
-            @RequestParam(name = "calculationType") String calculationType,
-            @RequestParam(name = "fromCities") List<CityRestDto> fromCities,
-            @RequestParam(name = "toCities") List<CityRestDto> toCities
-    ) throws DistanceCalculatorException {
-        logger.info("get distances: type {} from cities {} to cities {} ", calculationType, fromCities, toCities);
-        return restService.calculateDistance(CalculationType.valueOf(calculationType.toUpperCase()), fromCities, toCities);
+            @RequestBody DistanceRequest distanceRequest
+            ) throws DistanceCalculatorException {
+        logger.info("get distances: type {} from cities {} to cities {} ", distanceRequest.getCalculationType(),
+                distanceRequest.getFromCities(), distanceRequest.getToCities());
+        CalculationType calculationType = CalculationType.valueOf(distanceRequest.getCalculationType().toUpperCase());
+        List<CityRestDto> fromCities = distanceRequest.getFromCities();
+        List<CityRestDto> toCities = distanceRequest.getToCities();
+        return restService.calculateDistance(calculationType, fromCities, toCities);
     }
+
 
     @PutMapping("/api/upload")
     public ResponseEntity uploadXmlFile(

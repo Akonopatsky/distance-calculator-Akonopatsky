@@ -1,6 +1,11 @@
 package distancecalculator.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import distancecalculator.dao.CityDistanceDao;
+import distancecalculator.exceptions.DistanceCalculatorException;
+import distancecalculator.rest.dto.CityRestDto;
+import distancecalculator.rest.dto.DistanceRequest;
 import distancecalculator.rest.dto.XmlDto;
 import distancecalculator.model.City;
 import distancecalculator.model.Distance;
@@ -18,7 +23,7 @@ public class GeneratorTestData {
     private CityDistanceDao dao;
 
     public static void main(String[] args) throws Exception {
-        GeneratorTestData generatorTestData = new GeneratorTestData();
+        //GeneratorTestData generatorTestData = new GeneratorTestData();
         //generatorTestData.createFileFrom("citiest.csv");
     }
 
@@ -48,7 +53,7 @@ public class GeneratorTestData {
         int toIndex = 0;
         City toCity = null;
         for (City city : list) {
-            for (int i = 0; i < quantity / (list.size()-1); i++) {
+            for (int i = 0; i < quantity / (list.size() - 1); i++) {
                 do {
                     toIndex = random.nextInt(toList.size());
                     toCity = toList.get(toIndex);
@@ -58,5 +63,26 @@ public class GeneratorTestData {
             }
         }
         return distanceList;
+    }
+
+    public String jsont() throws DistanceCalculatorException, JsonProcessingException {
+        City city1 = dao.getById(2);
+        City city2 = dao.getById(3);
+        City city3 = dao.getById(4);
+        CityRestDto cityRestDto1 = new CityRestDto(city1);
+        CityRestDto cityRestDto2 = new CityRestDto(city2);
+        CityRestDto cityRestDto3 = new CityRestDto(city3);
+        List<CityRestDto> fromCities = new ArrayList<>();
+        fromCities.add(cityRestDto1);
+        fromCities.add(cityRestDto2);
+        fromCities.add(cityRestDto3);
+        List<CityRestDto> toCities = new ArrayList<>(fromCities);
+        DistanceRequest distanceRequest = new DistanceRequest();
+        distanceRequest.setCalculationType("CROW_FLIGHT");
+        distanceRequest.setFromCities(fromCities);
+        distanceRequest.setToCities(toCities);
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(distanceRequest);
+        return jsonString;
     }
 }

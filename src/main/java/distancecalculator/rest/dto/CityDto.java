@@ -63,4 +63,12 @@ public class CityDto {
         return new City(name, latitude, longitude);
     }
 
+    @Override
+    public String toString() {
+        return "CityDto{" +
+                "name='" + name + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

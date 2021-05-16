@@ -24,8 +24,8 @@ public class CityRestDto {
     }
 
     @XmlElement
-    public void setId(long id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = Long.parseLong(id);
     }
 
     @XmlElement
@@ -41,5 +41,11 @@ public class CityRestDto {
         return name;
     }
 
-
+    @Override
+    public String toString() {
+        return "CityRestDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
