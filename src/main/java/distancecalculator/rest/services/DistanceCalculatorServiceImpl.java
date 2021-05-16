@@ -64,10 +64,10 @@ public class DistanceCalculatorServiceImpl implements DistanceCalculatorService 
     @Transactional(readOnly = true)
     public void writeCitiesToStream(final OutputStream outputStream) {
         Stream<City> cityStream = dao.findAllCitiesStream();
-        CityRestDtoList cityRestDtoList = new CityRestDtoList();
-        cityStream.forEach(cityRestDtoList::add);
+        CityResponseDtoList cityResponseDtoList = new CityResponseDtoList();
+        cityStream.forEach(cityResponseDtoList::add);
         try {
-            XmlService.marshal(cityRestDtoList, outputStream, CityRestDtoList.class);
+            XmlService.marshal(cityResponseDtoList, outputStream, CityResponseDtoList.class);
         } catch (JAXBException e) {
             e.printStackTrace();
         };

@@ -4,6 +4,7 @@ import distancecalculator.model.City;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class CityRestDto {
@@ -28,6 +29,7 @@ public class CityRestDto {
         this.id = id;
     }
 
+    @XmlTransient
     public void setId(String id) {
         this.id = Long.parseLong(id);
     }
