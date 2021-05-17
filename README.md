@@ -1,4 +1,4 @@
-## task for java junior vacancy
+## Task for java junior vacancy
 
 ### http requests and test data are in /src/main/resources/httprequests:
 - 1_loadFile.http - load data from smalltest.xml in DB. **It is not idempotent** ;
