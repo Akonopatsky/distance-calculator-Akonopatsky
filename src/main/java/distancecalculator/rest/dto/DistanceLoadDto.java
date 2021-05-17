@@ -12,6 +12,7 @@ public class DistanceLoadDto implements Serializable {
 
     private long fromCity;
     private long toCity;
+    private long id;
     private double distance;
 
     public DistanceLoadDto() {
@@ -21,6 +22,11 @@ public class DistanceLoadDto implements Serializable {
         setFromCity(distance.getFromCity().getId());
         setToCity(distance.getToCity().getId());
         setDistance(distance.getDistance());
+    }
+
+    @XmlElement
+    public long getId() {
+        return id;
     }
 
     @XmlElement
@@ -36,6 +42,11 @@ public class DistanceLoadDto implements Serializable {
     @XmlElement
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getFromCity() {

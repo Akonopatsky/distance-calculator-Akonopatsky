@@ -59,7 +59,7 @@ public class CityLoadDto {
         return latitude;
     }
 
-    public City getCity() {
+    public City createCity() {
         return new City(name, latitude, longitude);
     }
 

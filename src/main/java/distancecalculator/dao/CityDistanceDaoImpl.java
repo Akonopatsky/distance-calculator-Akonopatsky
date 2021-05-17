@@ -25,7 +25,14 @@ public class CityDistanceDaoImpl implements CityDistanceDao {
     }
 
     @Override
-    public City getById(long id) throws DistanceCalculatorException {
+    public Optional<City> getByIdOptional(long id) {
+        return cityRepository.getCityById(id);
+    }
+
+
+
+    @Override
+    public City getCity(long id) throws DistanceCalculatorException {
         return cityRepository.findById(id).orElseThrow(() -> new DistanceCalculatorException("there is no city id " + id));
     }
 
