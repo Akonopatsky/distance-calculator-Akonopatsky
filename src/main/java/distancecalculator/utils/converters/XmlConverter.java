@@ -11,8 +11,8 @@ import javax.xml.bind.Unmarshaller;
 import java.io.*;
 
 @Service
-public class XmlService {
-    private static final Logger logger = LoggerFactory.getLogger(XmlService.class);
+public class XmlConverter {
+    private static final Logger logger = LoggerFactory.getLogger(XmlConverter.class);
 
     public static<T> T unMarshal(InputStream inputStream, Class<T> clazz) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
