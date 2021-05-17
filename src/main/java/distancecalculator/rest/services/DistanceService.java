@@ -61,7 +61,7 @@ public class DistanceService {
     public List<City> getCityList(List<CityRestDto> cityRestDtoList) throws DistanceCalculatorException {
         List<City> result = new ArrayList<>();
         for (CityRestDto cityRestDto : cityRestDtoList) {
-            result.add(dao.getById(cityRestDto.getId()));
+            result.add(dao.getCityById(cityRestDto.getId()));
         }
         return result;
     }

@@ -14,7 +14,7 @@ public interface CityDistanceDao {
 
     List<City> getAllCities();
 
-    City getById(long id) throws DistanceCalculatorException;
+    City getCityById(long id) throws DistanceCalculatorException;
 
     Optional<Distance> getDistance(City fromCity, City toCity);
 

@@ -1,10 +1,9 @@
-PUT localhost:8081/api/upload
+POST localhost:8081/api/upload
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
 Content-Disposition: form-data; name="file"; filename="smalltest.xml"
 
-// The 'input.txt' file will be uploaded
 < ./smalltest.xml
 
 --boundary

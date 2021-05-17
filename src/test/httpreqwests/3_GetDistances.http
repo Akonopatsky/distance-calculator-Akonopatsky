@@ -1,6 +1,9 @@
 GET localhost:8081/api/distances
 Content-Type: application/json
 
+
+#"calculationType": "DISTANCE_MATRIX",
+#"calculationType": "All",
 {
   "calculationType": "CROW_FLIGHT",
   "fromCities": [
@@ -29,10 +32,6 @@ Content-Type: application/json
     {
       "id": 7,
       "name": "Dubai"
-    },
-    {
-      "id": 8,
-      "name": "Dibba Al-Fujairah"
     }
   ]
 }

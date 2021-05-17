@@ -40,7 +40,7 @@ public class CityRestController {
     }
 
 
-    @PutMapping("/upload")
+    @PostMapping("/upload")
     public ResponseEntity uploadXmlFile(
             @RequestParam(name = "file") MultipartFile file
     ) throws Exception {
