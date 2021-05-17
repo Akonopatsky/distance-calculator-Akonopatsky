@@ -19,6 +19,7 @@ public class DistanceLoadDto implements Serializable {
     }
 
     public DistanceLoadDto(Distance distance) {
+        setId(distance.getId());
         setFromCity(distance.getFromCity().getId());
         setToCity(distance.getToCity().getId());
         setDistance(distance.getDistance());

@@ -42,7 +42,7 @@ public class UploadService {
             cityMap.put(entry.getKey(), loadCity);
             saveList.add(loadCity);
         }
-        dao.saveCityList(new ArrayList<>(cityMap.values()));
+        dao.saveCityList(saveList);
         return cityMap;
     }
 
