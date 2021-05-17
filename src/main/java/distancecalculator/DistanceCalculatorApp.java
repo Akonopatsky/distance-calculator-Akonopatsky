@@ -13,5 +13,4 @@ private static CityDistanceDao cityDistanceDao;
 	public static void main(String[] args) {
 		SpringApplication.run(DistanceCalculatorApp.class, args);
 	}
-
 }

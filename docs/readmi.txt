@@ -1,0 +1,1 @@
+Perform request from src/main/resources/httprequests/1_loadFile.http for loading test data.

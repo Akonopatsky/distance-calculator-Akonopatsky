@@ -9,14 +9,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-
 public interface CityDistanceDao {
 
     List<City> getAllCities();
 
-    City getCity(long id) throws DistanceCalculatorException;
-
-    Optional<City> getByIdOptional(long id);
+    City getCityById(long id) throws DistanceCalculatorException;
 
     Optional<Distance> getDistance(City fromCity, City toCity);
 

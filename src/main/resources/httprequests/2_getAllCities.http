@@ -1,0 +1,5 @@
+GET localhost:8080/api/cities
+
+###
+
+#GET localhost:8081/api/stream/cities

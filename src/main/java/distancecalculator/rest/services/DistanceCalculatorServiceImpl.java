@@ -4,7 +4,7 @@ import distancecalculator.dao.CityDistanceDao;
 import distancecalculator.exceptions.DistanceCalculatorException;
 import distancecalculator.model.City;
 import distancecalculator.rest.dto.*;
-import distancecalculator.utils.converters.XmlService;
+import distancecalculator.utils.converters.XmlConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -56,7 +56,7 @@ public class DistanceCalculatorServiceImpl implements DistanceCalculatorService 
     public void upload(MultipartFile multipartFile) throws Exception {
         logger.info("try to parse file : {}", multipartFile.getName());
         InputStream inputStream = multipartFile.getInputStream();
-        XmlDto xmlDto = XmlService.unMarshal(inputStream, XmlDto.class);
+        XmlDto xmlDto = XmlConverter.unMarshal(inputStream, XmlDto.class);
         uploadService.uploadData(xmlDto);
     }
 
@@ -67,7 +67,7 @@ public class DistanceCalculatorServiceImpl implements DistanceCalculatorService 
         CityResponseDtoList cityResponseDtoList = new CityResponseDtoList();
         cityStream.forEach(cityResponseDtoList::add);
         try {
-            XmlService.marshal(cityResponseDtoList, outputStream, CityResponseDtoList.class);
+            XmlConverter.marshal(cityResponseDtoList, outputStream, CityResponseDtoList.class);
         } catch (JAXBException e) {
             e.printStackTrace();
         }

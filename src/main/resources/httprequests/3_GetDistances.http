@@ -1,0 +1,40 @@
+GET localhost:8080/api/distances
+Content-Type: application/json
+
+
+#"calculationType": "DISTANCE_MATRIX",
+#"calculationType": "All",
+{
+  "calculationType": "CROW_FLIGHT",
+  "fromCities": [
+    {
+      "id": 2,
+      "name": "Andorra la Vella"
+    },
+    {
+      "id": 3,
+      "name": "Umm Al Quwain City"
+    },
+    {
+      "id": 4,
+      "name": "Ras Al Khaimah City"
+    }
+  ],
+  "toCities": [
+    {
+      "id": 5,
+      "name": "Zayed City"
+    },
+    {
+      "id": 6,
+      "name": "Khawr Fakkan"
+    },
+    {
+      "id": 7,
+      "name": "Dubai"
+    }
+  ]
+}
+
+###
+
